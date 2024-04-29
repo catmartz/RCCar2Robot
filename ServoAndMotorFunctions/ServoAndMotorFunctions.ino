@@ -88,3 +88,54 @@ void coastSpeed (int currSpeed) {
 
 } 
 
+/*
+Moves the car forward by a set speed
+*/
+void forward (int speed) {
+  motor.setSpeed(speed);
+}
+
+
+/*
+Moves the car backwards by a set speed
+*/
+void backward (int speed) {
+  motor.setSpeed(-speed);
+}
+
+
+/*
+Turn the car left by a given value. Value should fall within the range MIDDLE_POINT to LEFT_POINT
+or 285 to 325. 
+*/
+void turnLeft (int left) {
+
+  // If left is greater than the max left or less than/equal to the middle, set to value to midpoint between MIDDLE_POINT and LEFT_POINT
+  if (left > LEFT_POINT || left <= MIDDLE_POINT) {
+    
+    // 325 + 20 = 345 
+    left = MIDDLE_POINT + ((LEFT_POINT - MIDDLE_POINT) / 2);
+  }
+  pwm.setPWM(servonum, 0, left);
+
+}
+
+
+/*
+Turn the car left by a given value. Value should fall within the range RIGHT_POINT to MIDDLE_POINT
+or 325 to 365. 
+*/
+void turnRight (int right) {
+
+  // If right is less than the min right or greater than/equal to the middle, set to value to midpoint of RIGHT_POINT AND MIDDLE_POINT 
+  if (right < RIGHT_POINT || right >= MIDDLE_POINT) {
+    
+    // 285 + 20 = 305
+    right = RIGHT_POINT + ((MIDDLE_POINT - RIGHT_POINT) / 2);
+  }
+  pwm.setPWM(servonum, 0, right);
+
+}
+
+
+
