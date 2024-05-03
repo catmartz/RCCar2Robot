@@ -191,3 +191,17 @@ void printUltrasonic(int delayInterval) {
 }
 
 
+void navigate(){
+  int distance = sonar.ping_cm();
+  Serial.print(distance);
+  if (distance > 20 || distance == 0) {
+    forward(50, 0);
+    distance = sonar.ping_cm();
+  } 
+  else{
+    backward(50, 2000);
+    turnLeft(300);
+    forward(50,2000);
+    resetSteering();
+  }
+}
