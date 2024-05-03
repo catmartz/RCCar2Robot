@@ -13,9 +13,9 @@ Servo and Motor Functions
 #define USMAX  2400 // This is the rounded 'maximum' microsecond length based on the maximum pulse of 600
 #define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
 
-#define MIDDLE_POINT  325  // Straight 
-#define RIGHT_MAX  365  // Right Max
-#define LEFT_MAX  285  // Left Max
+#define MIDDLE_POINT  347  // Straight 
+#define RIGHT_MAX  385  // Right Max
+#define LEFT_MAX  305  // Left Max
 
 // Hook up HC-SR04 with Trig to Arduino Pin 9, Echo to Arduino pin 10
 #define TRIGGER_PIN 9
@@ -56,17 +56,25 @@ void setup() {
   delay(10);
 
   // Reset servo to middle point for driving (straight)
-  pwm.setPWM(servonum, 0, 325); 
+  pwm.setPWM(servonum, 0, MIDDLE_POINT); 
   
   // Make sure motor is stopped before running other code
   motor.setSpeed(0);
 
-  Serial.print("Setup Complete");
+  // Serial.print("Setup Complete");
 
+  // pwm.setPWM(servonum, 0,MIDDLE_POINT);
+  // delay(2000);
+  // // SAMPLE CALLS
+  // pwm.setPWM(servonum, 0,RIGHT_MAX);
+  // delay(2000);
+  // pwm.setPWM(servonum, 0,MIDDLE_POINT);
+  // delay(2000);
+  // pwm.setPWM(servonum, 0,LEFT_MAX);
+  // delay(2000);
+  // resetSteering();
 
-  // SAMPLE CALLS
-
-  // forward(100, 2000);
+  // forward(50, 5000);
   // turnLeft(285);
   // forward(150, 1700);
 
@@ -79,7 +87,9 @@ void setup() {
 
 
 void loop() {
-  printUltrasonic(500);
+  // 
+  navigate();
+  // printUltrasonic(1000);
 }
 
 
@@ -190,7 +200,6 @@ void printUltrasonic(int delayInterval) {
   delay(delayInterval);
 }
 
-
 void navigate(){
   int distance = sonar.ping_cm();
   Serial.print(distance);
@@ -205,3 +214,7 @@ void navigate(){
     resetSteering();
   }
 }
+
+
+
+
